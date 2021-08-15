@@ -3,8 +3,34 @@ const progressarea = document.querySelector('#progressdiv');
 const progresstext = document.querySelector("#progressbar");
 
 
+
 reviewfield.addEventListener("keyup", (e) => {
   const reviewval = e.target.value;
+  var cli = 0;
+
+  
+  const params = {
+    text: reviewval,
+    
+};
+const options = {
+    method: 'POST',
+    body: JSON.stringify( params )  
+};
+
+
+  fetch('https://ipeirotis-hrd.appspot.com/_ah/api/readability/v1/getReadabilityMetrics', options)
+.then(response => response.json())
+.then(data => {
+  console.log('Success:', data);
+  cli = data.COLEMAN_LIAU;
+  console.log(cli);
+  })
+
+.catch((error) => {
+  console.error('Error:', error);
+  });
+
 
   progressarea.style.display = "none";
 

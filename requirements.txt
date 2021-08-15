@@ -36,4 +36,4 @@ urllib3==1.25.10
 virtualenv==20.3.1
 virtualenvwrapper-win==1.2.6
 wrapt==1.12.1
-django_heroku
+django_heroku==0.3.1
