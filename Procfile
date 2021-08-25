@@ -1,1 +1,1 @@
-web: gunicorn Reviews-yelp.wsgi
+web: gunicorn practicesite.wsgi
