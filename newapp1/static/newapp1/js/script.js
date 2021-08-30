@@ -3,18 +3,25 @@ const reviewfield = document.querySelector("#reviewfield");
 const progressarea = document.querySelector('#progressdiv');
 const progresstext = document.querySelector("#progressbar");
 
+const depthfield = document.querySelector("#depthfield");
+const arifield = document.querySelector("#arifield");
+const clifield = document.querySelector("#clifield");
+const avgfield = document.querySelector("#avgfield");
+
+
 
 
 reviewfield.addEventListener("keyup", (e) => {
   const text = e.target.value;
-  console.log(text);
+  //console.log(text);
   const reviewval = text.replace(/\s+/g, '').trim();
-  console.log(reviewval);
+  //console.log(reviewval);
   
   var cli = 0;
   var ari = 0;
   var avg = 0;
   var depth = reviewval.length;
+  depthfield.value = depth;
   
 
   
@@ -31,12 +38,19 @@ const options = {
   fetch('https://ipeirotis-hrd.appspot.com/_ah/api/readability/v1/getReadabilityMetrics', options)
 .then(response => response.json())
 .then(data => {
-  console.log('Success:', data);
+  //console.log('Success:', data);
   cli = data.COLEMAN_LIAU;
   ari = data.ARI;
   avg = (cli+ari)/2;
   //depth = data.CHARACTERS;
-  console.log(avg);
+  console.log("avg"+avg);
+  console.log("cli"+cli);
+  console.log("ari"+ari);
+  
+
+  clifield.value = cli;
+  arifield.value = ari;
+  avgfield.value = avg;
   })
 
 .catch((error) => {
@@ -50,49 +64,51 @@ const options = {
     progressarea.style.display = "block";
    if(depth>273){
     progresstext.innerText='High';
-    progresstext.classList.remove('w-25','w-50','w-75','bg-danger','bg-info','bg-warning');
+    progresstext.classList.remove('w-50','bg-danger');
     progresstext.classList.add('w-100','bg-success');
 
    }
    else if(depth>145.500){
-     progresstext.innerText='High';
-     progresstext.classList.remove('w-25','w-50','w-75','bg-danger','bg-info','bg-warning');
-     progresstext.classList.add('w-100','bg-success');
+    progresstext.innerText='High';
+    progresstext.classList.remove('w-50','bg-danger');
+    progresstext.classList.add('w-100','bg-success');
+
    }
    else if(depth>123.500 && avg>8.261){
     progresstext.innerText='High';
-    progresstext.classList.remove('w-25','w-50','w-75','bg-danger','bg-info','bg-warning');
+    progresstext.classList.remove('w-50','bg-danger');
     progresstext.classList.add('w-100','bg-success');
+
    }
 
    else if(depth>371 && avg>20.282){
     progresstext.innerText='Low';
-    progresstext.classList.remove('w-50','w-75','w-100','bg-info','bg-warning','bg-success');
-    progresstext.classList.add('w-25','bg-danger');
+    progresstext.classList.remove('w-100','bg-success');
+    progresstext.classList.add('w-50','bg-danger');
    }
 
    else if(depth<=123.500){
     progresstext.innerText='Low';
-    progresstext.classList.remove('w-50','w-75','w-100','bg-info','bg-warning','bg-success');
-    progresstext.classList.add('w-25','bg-danger');
+    progresstext.classList.remove('w-100','bg-success');
+    progresstext.classList.add('w-50','bg-danger');
    }
 
    else if(depth<=145.500 && avg<=8.261){
     progresstext.innerText='Low';
-    progresstext.classList.remove('w-50','w-75','w-100','bg-info','bg-warning','bg-success');
-    progresstext.classList.add('w-25','bg-danger');
+    progresstext.classList.remove('w-100','bg-success');
+    progresstext.classList.add('w-50','bg-danger');
    }
 
    else if(avg>20.82){
     progresstext.innerText='Low';
-    progresstext.classList.remove('w-50','w-75','w-100','bg-info','bg-warning','bg-success');
-    progresstext.classList.add('w-25','bg-danger');
+    progresstext.classList.remove('w-100','bg-success');
+    progresstext.classList.add('w-50','bg-danger');
    }
 
    else{
     progresstext.innerText='Low';
-    progresstext.classList.remove('w-50','w-75','w-100','bg-info','bg-success', 'bg-danger');
-    progresstext.classList.add('w-25','bg-warning');
+    progresstext.classList.remove('w-100','bg-success');
+    progresstext.classList.add('w-50','bg-danger');
    }
    
   /*  if(reviewval.length < 30) {
