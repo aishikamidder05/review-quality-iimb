@@ -6,7 +6,10 @@ const progresstext = document.querySelector("#progressbar");
 
 
 reviewfield.addEventListener("keyup", (e) => {
-  const reviewval = e.target.value;
+  const text = e.target.value;
+  console.log(text);
+  const reviewval = text.replace(/\s+/g, '').trim();
+  console.log(reviewval);
   
   var cli = 0;
   var ari = 0;
