@@ -46,7 +46,7 @@ const options = {
   console.log("avg"+avg);
   console.log("cli"+cli);
   console.log("ari"+ari);
-  
+
 
   clifield.value = cli;
   arifield.value = ari;
