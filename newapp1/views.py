@@ -15,8 +15,8 @@ def index(request):
 
 
 
-        u = UserReview(review_heading=review_heading, review_box=review_box, star_rating=star_rating , review_depth = review_depth,
-        ari=ari, cli =cli, avg=avg)
+        u = UserReview(review_heading=review_heading, review_box=review_box, star_rating=star_rating ,
+         review_depth = review_depth, ari=ari, cli =cli, avg=avg)
         u.save()
 
         return render(request, 'newapp1/index.html')
