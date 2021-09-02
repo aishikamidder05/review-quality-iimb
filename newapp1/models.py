@@ -10,7 +10,9 @@ class UserReview(models.Model):
     ari = models.DecimalField(null=True, blank=True, max_digits=10, decimal_places=5)
     cli = models.DecimalField(null=True, blank=True, max_digits=10, decimal_places=5)
     avg = models.DecimalField(null=True, blank=True, max_digits=10, decimal_places=5) 
+    prolific_id = models.CharField(max_length=300, null=True, blank=True)
+
 
 
     def __str__(self):
-        return self.review_heading
+        return self.prolific_id

@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
 from .models import UserReview
 
 def index(request):
@@ -13,14 +14,21 @@ def index(request):
         cli = request.POST.get('cli')
         avg = request.POST.get('avg')
 
-
-
+        prolific_id = request.POST.get('prolific_id')
         u = UserReview(review_heading=review_heading, review_box=review_box, star_rating=star_rating ,
-         review_depth = review_depth, ari=ari, cli =cli, avg=avg)
+         review_depth = review_depth, ari=ari, cli =cli, avg=avg, prolific_id=prolific_id)
         u.save()
 
-        return render(request, 'newapp1/index.html')
+        return redirect(exit)
+
     else:
         return render(request, 'newapp1/index.html')
+
+
+
+def exit(request):
+    return render (request, 'newapp1/exit.html')
+
+
 
 # Create your views here.

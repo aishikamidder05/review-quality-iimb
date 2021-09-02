@@ -41,9 +41,20 @@
 
       <div class = "container mt-5">
 
-        <p class="h4">Create a review</p>
+        
         <form action="{% url 'home' %}"  method="post">
         {% csrf_token %}
+         
+
+          <div class="form-group mt-3">
+            <h5>Enter your Prolific ID</h5>
+
+            <input name='prolific_id' type="text" class="form-control" id="idfield" required >
+
+          </div>
+        
+          <p class="h4">Create a review</p>
+
           <div class="rating-wrap">
             <h5>Overall rating</h5>
             <div class="center">
