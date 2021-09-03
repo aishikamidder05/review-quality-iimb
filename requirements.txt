@@ -37,3 +37,4 @@ virtualenv==20.3.1
 virtualenvwrapper-win==1.2.6
 wrapt==1.12.1
 django_heroku==0.3.1
+django-admin-csvexport==1.11
