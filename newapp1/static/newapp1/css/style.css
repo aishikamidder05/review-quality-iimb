@@ -25,7 +25,6 @@ html,body{
 @keyframes         bg-scrolling-reverse {
   100% { background-position: 50px 50px; }
 }
-
 @-webkit-keyframes bg-scrolling {
   0% { background-position: 50px 50px; }
 }
@@ -38,7 +37,6 @@ html,body{
 @keyframes         bg-scrolling {
   0% { background-position: 50px 50px; }
 }
-
 /*body {
 	font-family: Arial, sans-serif;
 
@@ -53,15 +51,12 @@ html,body{
   -o-animation-timing-function:      linear;
   animation-timing-function:         linear;
 }*/
-
-
-body{
+/*body{
   background-color:#BFDFEC;
   background-repeat:repeat-x;
   background-image:url("https://i.stack.imgur.com/b7z29.png");
   animation: movement 10s linear infinite;
 }
-
 @keyframes movement{
   0% {
     background-position:0px 0px;
@@ -69,12 +64,23 @@ body{
   100%{
     background-position:560px 0px;
   }
+}*/
+
+
+body{
+  
+  background: #c2e59c;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #64b3f4, #c2e59c);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #64b3f4, #c2e59c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
 }
 
 .rating-wrap {
-    max-width: 480px;
+    max-width: 580px;
     padding: 15px;
-		background-color: #FFF;
+		background-color: #FDF2FD;
     box-shadow: 0 0 3px 0 rgb(0 0 0 / 20%);
     text-align: center;
 }
