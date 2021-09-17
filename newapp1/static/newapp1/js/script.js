@@ -3,57 +3,45 @@ const reviewfield = document.querySelector("#reviewfield");
 const progressarea = document.querySelector('#progressdiv');
 const progresstext = document.querySelector("#progressbar");
 
-const depthfield = document.querySelector("#depthfield");
-const arifield = document.querySelector("#arifield");
-const clifield = document.querySelector("#clifield");
-const avgfield = document.querySelector("#avgfield");
 
 
 
 
 reviewfield.addEventListener("keyup", (e) => {
+
+  var depth = 0;
+  var avg = 0;
   const text = e.target.value;
-  //console.log(text);
-  const reviewval = text.replace(/\s+/g, '').trim();
+ // console.log(text);
+
+  const reviewval = text.replace(/\s+/g, ' ').trim();
   //console.log(reviewval);
   
-  var words=0;
-  var L=0;
-  var S=0;
-  var sent=0;
-  var ari=0;
-  var cli=0;
-  var avg=0;
   
   if(reviewval.length>0){
-    var depth = reviewval.length;
-  depthfield.value = depth;
-  console.log("depth " + depth);
-  
-   words = reviewval.split(' ').length;
-  console.log("words"+words);
-  
-   L = (depth/words)*100;
-  console.log("L"+L);
+      var formdata = new FormData();
+      formdata.append("review_box", reviewval);
 
-  sent = reviewval.split('.').length;
-  console.log("sent"+sent);
-  S = (sent/words)*100;
-  console.log("S"+S);
+      var requestOptions = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow'
+    };
 
- cli = 0.0588 * L - 0.296 * S - 15.8;
-  console.log("cli " + cli);
-
- ari = 4.71 * (L/100) + 0.5 * (100/S) - 21.43;
-  console.log("ari " + ari);
-
- avg = (cli + ari )/2;
-  console.log("avg " + avg); 
-
+    fetch("getindices", requestOptions)
+      .then(res => res.json())
+      .then(response =>{
+        //console.log(response.avg)
+        avg = response.avg;
+        depth = response.depth;
+        console.log(avg, depth);
+      } )
+      .catch(error => console.log('error', error));
+      
   
   }
  
-
+  
   progressarea.style.display = "none";
 
   if (reviewval.length > 0) {
