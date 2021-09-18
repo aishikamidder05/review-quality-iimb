@@ -5,11 +5,12 @@ const progresstext = document.querySelector("#progressbar");
 
 reviewfield.addEventListener("keyup", (e) => {
 
+  progressarea.style.display = "none";
   const text = e.target.value;
  // console.log(text);
 
   const reviewval = text.replace(/\s+/g, ' ').trim();
-  
+
   //console.log(reviewval);
 
   const fetchData = async (response) =>{
