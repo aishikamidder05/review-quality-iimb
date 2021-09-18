@@ -1,21 +1,23 @@
-
 const reviewfield = document.querySelector("#reviewfield");
 const progressarea = document.querySelector('#progressdiv');
 const progresstext = document.querySelector("#progressbar");
 
 
-
-
-
 reviewfield.addEventListener("keyup", (e) => {
 
-  var depth = 0;
-  var avg = 0;
   const text = e.target.value;
  // console.log(text);
 
   const reviewval = text.replace(/\s+/g, ' ').trim();
+  
   //console.log(reviewval);
+
+  const fetchData = async (response) =>{
+    const avg = await response.avg;
+    const depth = await response.depth;
+    console.log(avg, depth);
+    indicator(avg, depth, reviewval);
+  }
   
   
   if(reviewval.length>0){
@@ -31,18 +33,16 @@ reviewfield.addEventListener("keyup", (e) => {
     fetch("getindices", requestOptions)
       .then(res => res.json())
       .then(response =>{
-        //console.log(response.avg)
-        avg = response.avg;
-        depth = response.depth;
-        console.log(avg, depth);
-      } )
-      .catch(error => console.log('error', error));
-      
-  
+        console.log(response)
+        fetchData(response);
+      })
+      .catch(error => console.log('error', error));  
   }
- 
-  
+}); 
+
+const indicator = (avg, depth, reviewval) => {
   progressarea.style.display = "none";
+  console.log(avg, depth);
 
   if (reviewval.length > 0) {
     progressarea.style.display = "block";
@@ -94,32 +94,5 @@ reviewfield.addEventListener("keyup", (e) => {
     progresstext.classList.remove('w-100','bg-success');
     progresstext.classList.add('w-50','bg-danger');
    }
-   
-  /*  if(reviewval.length < 30) {
-      progresstext.innerText='Low';
-      progresstext.classList.remove('w-50','w-75','w-100','bg-info','bg-warning','bg-success');
-      progresstext.classList.add('w-25','bg-danger');
-    }
-    
-    else{
-      progresstext.innerText='High';
-      progresstext.classList.remove('w-25','w-50','w-75','bg-danger','bg-info','bg-warning');
-      progresstext.classList.add('w-100','bg-success');
-    } */
   }
-}); 
-
-
-
-
-
-/*else if(reviewval.length >= 30 && reviewval.length < 60) {
-  progresstext.innerText='Average';
-  progresstext.classList.remove('w-25','w-75','w-100','bg-danger','bg-info','bg-success');
-  progresstext.classList.add('w-50','bg-warning');
 }
-else if(reviewval.length >= 60 && reviewval.length < 100) {
-  progresstext.innerText='Medium';
-  progresstext.classList.remove('w-25','w-50','w-100','bg-danger','bg-warning','bg-success');
-  progresstext.classList.add('w-75','bg-info');
-}*/
