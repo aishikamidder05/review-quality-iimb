@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from .models import UserReview
+from .models import UserReview, UserReviewNoIndicator, UserReview500char
 import re
+import random
 
 def index(request):
     if request.method == 'POST':
 
 
-
+        token = request.POST.get("token")
         star_rating = request.POST.get('star_rating')
         review_heading = request.POST.get('review_heading')
         review_box = request.POST.get('review_box')
@@ -16,7 +17,9 @@ def index(request):
         no_space = trimmed_review.replace(" ", "")
         review_depth = len(no_space)
 
-        
+        print(token)
+        print(type(token))
+
         if review_depth >0: 
         
 
@@ -45,17 +48,36 @@ def index(request):
             
 
             prolific_id = request.POST.get('prolific_id')
-            u = UserReview(review_heading=review_heading, review_box=review_box, star_rating=star_rating ,
-             review_depth = review_depth, ari=ari, cli =cli, avg=avg, prolific_id=prolific_id)
-            u.save()
+            if token == "1":
+                u = UserReview(review_heading=review_heading, review_box=review_box, star_rating=star_rating ,
+                review_depth = review_depth, ari=ari, cli =cli, avg=avg, prolific_id=prolific_id)
+                u.save()
+
+            elif token == "2":
+                u = UserReviewNoIndicator(review_heading=review_heading, review_box=review_box, star_rating=star_rating ,
+                review_depth = review_depth, ari=ari, cli =cli, avg=avg, prolific_id=prolific_id)
+                u.save()
+
+            else :  
+                u = UserReview500char(review_heading=review_heading, review_box=review_box, star_rating=star_rating ,
+                review_depth = review_depth, ari=ari, cli =cli, avg=avg, prolific_id=prolific_id)
+                u.save()
 
             return redirect(exit)
+
         else:
             return render(request, 'newapp1/index.html')
 
     else:
-        return render(request, 'newapp1/index.html')
-
+        num_list = [4, 5 , 6]
+        random_num = random.choice(num_list)
+        if random_num == 4: 
+            return render(request, 'newapp1/index.html')
+        elif random_num == 5:
+            return render(request, 'newapp1/index-2.html')
+        else:
+            return render(request, 'newapp1/index500.html')    
+             
 
 
 def exit(request):
