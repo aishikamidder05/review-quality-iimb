@@ -21,7 +21,7 @@
       <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <div class = "container">
           <a class="navbar-brand" href="#">
-           <img src="{% static 'newapp1/images/ebay.png' %}" alt="" width="50" height="30">
+           <img src="{% static 'newapp1/images/cart.png' %}" alt="" width="50" height="30">
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -97,6 +97,11 @@
 
             <textarea name='review_box' class="form-control" id="reviewfield" rows="3" required></textarea>
            
+           <div style =" display: none;"> 
+           <input name ="token" value = "1"  type="text" class="form-control" id="headlinefield" readonly>
+           </div>
+
+
           <div class="mt-4" id="progressdiv" style="display: none;">
             <h6>Review Quality Indicator</h6>
             <div class="progress mt-2" style="height: 25px; width: 200px;">
