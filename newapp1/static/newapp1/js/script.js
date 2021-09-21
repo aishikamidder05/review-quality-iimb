@@ -5,7 +5,10 @@ const progresstext = document.querySelector("#progressbar");
 
 reviewfield.addEventListener("keyup", (e) => {
 
-  progressarea.style.display = "none";
+ //progressarea.style.display = "none";
+
+ progresstext.innerText='';
+ progresstext.classList.remove('w-50','bg-danger', 'w-100', 'bg-success');
   const text = e.target.value;
  // console.log(text);
 
@@ -42,11 +45,11 @@ reviewfield.addEventListener("keyup", (e) => {
 }); 
 
 const indicator = (avg, depth, reviewval) => {
-  progressarea.style.display = "none";
+  //progressarea.style.display = "none";
   console.log(avg, depth);
 
   if (reviewval.length > 0) {
-    progressarea.style.display = "block";
+    //progressarea.style.display = "block";
    if(depth>273){
     progresstext.innerText='High';
     progresstext.classList.remove('w-50','bg-danger');

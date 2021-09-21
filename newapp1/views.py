@@ -32,19 +32,19 @@ def index(request):
             S = (numSent/numWords)*100
             
             cli = 0.0588 * L - 0.296 * S - 15.8
-            ari = 4.71 * (L/100) + 0.5 * (100/S) - 21.43
+            ari = 4.71 *(review_depth/numWords) + 0.5 *(numWords/numSent) - 21.43
             avg = (cli + ari )/2
             
 
 
-           # print("depth " + str(review_depth))
-            #print("Words " + str(numWords))
-            #print("sent " + str(numSent))
-            #print("L " + str(L))
-           # print("S " + str(S))
-            #print("cli " + str(cli))
-            #print("ari " + str(ari))
-            #print("avg " + str(avg))
+            print("depth " + str(review_depth))
+            print("Words " + str(numWords))
+            print("sent " + str(numSent))
+            print("L " + str(L))
+            print("S " + str(S))
+            print("cli " + str(cli))
+            print("ari " + str(ari))
+            print("avg " + str(avg))
             
 
             prolific_id = request.POST.get('prolific_id')
