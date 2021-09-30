@@ -48,3 +48,12 @@ class UserReview500char(models.Model):
 
     def __str__(self):
         return self.prolific_id
+
+
+class RestModel(models.Model):
+    key = models.CharField(max_length=300)
+    value = models.IntegerField()
+
+    def __str__(self):
+        return self.key
+
