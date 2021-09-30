@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from .models import UserReview, UserReviewNoIndicator, UserReview500char
+from .models import UserReview, UserReviewNoIndicator, UserReview500char, RestModel
 import re
 import random
 
@@ -12,8 +12,13 @@ def index(request):
         star_rating = request.POST.get('star_rating')
         review_heading = request.POST.get('review_heading')
         review_box = request.POST.get('review_box')
+        print(review_box)
 
         trimmed_review = re.sub(' +',' ',review_box)
+        
+       # array = review_box.split()
+       # trimmed_review = " ".join(array)
+        print(trimmed_review)
         no_space = trimmed_review.replace(" ", "")
         review_depth = len(no_space)
 
@@ -22,8 +27,10 @@ def index(request):
 
         if review_depth >0: 
         
+        #abcd bca   cd ef
 
-            numWords = len(re.findall(r'\w+', trimmed_review))
+            #numWords = trimmed_review.count(" ") + 1
+            numWords = len(trimmed_review.split(' '))
             L = (review_depth/numWords)*100
 
             numSent = trimmed_review.count('.') + trimmed_review.count('!') + trimmed_review.count('?') 
@@ -69,14 +76,30 @@ def index(request):
             return render(request, 'newapp1/index.html')
 
     else:
-        num_list = [4, 5 , 6]
-        random_num = random.choice(num_list)
-        if random_num == 4: 
+        #num_list = [4, 5 , 6]
+        #random_num = random.choice(num_list)
+        #if random_num == 4: 
+          #  return render(request, 'newapp1/index.html')
+        #elif random_num == 5:
+        #    return render(request, 'newapp1/index-2.html')
+        #else:
+        #    return render(request, 'newapp1/index500.html')    
+
+        count = RestModel.objects.get(key='visited')
+        print(count.value)
+        newCount = count.value + 1
+        print(newCount)
+        count.value = newCount #initial 0 finally 1
+        print(count.value)
+        count.save()
+
+
+        if newCount%3 == 1: 
             return render(request, 'newapp1/index.html')
-        elif random_num == 5:
+        elif newCount%3 == 2:
             return render(request, 'newapp1/index-2.html')
         else:
-            return render(request, 'newapp1/index500.html')    
+            return render(request, 'newapp1/index500.html')
              
 
 
