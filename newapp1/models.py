@@ -15,7 +15,7 @@ class UserReview(models.Model):
 
 
     def __str__(self):
-        return self.star_rating
+        return self.prolific_id
 
 
 class UserReviewNoIndicator(models.Model):
