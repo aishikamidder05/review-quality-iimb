@@ -14,8 +14,8 @@ def index(request):
         review_box = request.POST.get('review_box')
         print(review_box)
 
-        trimmed_review = re.sub(' +',' ',review_box)
-        
+        trimmed_review1 = re.sub(' +',' ',review_box)
+        trimmed_review = re.sub(r'\.+','.',trimmed_review1 )
        # array = review_box.split()
        # trimmed_review = " ".join(array)
         print(trimmed_review)
