@@ -7,8 +7,7 @@ reviewfield.addEventListener("keyup", (e) => {
 
  //progressarea.style.display = "none";
 
- progresstext.innerText='';
- progresstext.classList.remove('w-50','bg-danger', 'w-100', 'bg-success');
+ 
   const text = e.target.value;
  // console.log(text);
 
@@ -16,15 +15,18 @@ reviewfield.addEventListener("keyup", (e) => {
 
   //console.log(reviewval);
 
-  const fetchData = async (response) =>{
+    const fetchData = async (response) =>{
     const avg = await response.avg;
     const depth = await response.depth;
     console.log(avg, depth);
     indicator(avg, depth, reviewval);
   }
   
-  
-  if(reviewval.length>0){
+   if(reviewval.length === 0){
+    progresstext.innerText='';
+    progresstext.classList.remove('w-50','bg-danger', 'w-100', 'bg-success');  
+   }
+  else{
       var formdata = new FormData();
       formdata.append("review_box", reviewval);
 
@@ -43,6 +45,8 @@ reviewfield.addEventListener("keyup", (e) => {
       .catch(error => console.log('error', error));  
   }
 }); 
+
+
 
 const indicator = (avg, depth, reviewval) => {
   //progressarea.style.display = "none";
